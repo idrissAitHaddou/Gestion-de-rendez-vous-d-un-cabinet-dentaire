@@ -1,0 +1,36 @@
+@import 'globals/variabls';
+@import 'itmes/dashboard';
+@import 'itmes/reservation';
+@import 'itmes/login';
+@import 'itmes/homepage';
+
+
+
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+
+    font-family: $font-text; ;
+
+    li,i{
+        cursor: pointer;
+    }
+    li{
+        display: flex;
+        padding: 2px;
+    }
+
+
+    
+}
+
+
+
+
+
+
+
