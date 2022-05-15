@@ -22,7 +22,7 @@ function Information() {
   }
 
   function handleEmail() {
-    let inputEmail = document.getElementById("emailR").value;
+    let inputEmail = document.getElementById("emailC").value;
     setEmail(inputEmail);
   }
 
@@ -158,7 +158,7 @@ function Information() {
                         defaultValue={email}
                         type="email"
                         name="email-address"
-                        id="email"
+                        id="emailC"
                         autocomplete="email"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         required

@@ -1,10 +1,13 @@
-import react,{useState} from 'react'
+import react,{useState , useEffect} from 'react'
 import axios from 'axios';
 import ImgIdriss from "../images/appointment.png";
 import { async } from 'q';
 
+
+
 function RendezVous() {
 
+  const [datetoday, setDatetoday] = useState("");
   const [sujet, setSujet] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -13,6 +16,12 @@ function RendezVous() {
   const [errordate, setErrordate] = useState(true);
   const [errortime, setErrorTime] = useState(true);
   const [errorAdded, setErrorErroradded] = useState(0);
+
+  useEffect(() => {
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    setDatetoday(date);
+  });
 
   function handleSujet() {
     let inputSujet = document.getElementById("sujet").value;
@@ -77,8 +86,23 @@ function RendezVous() {
     //** function to register user */
     async function addRendezVous(e) {
       e.preventDefault();
-  
-      if (
+
+      let today = new Date();
+      let dateIn = date.split('-');
+      
+    if(dateIn[0]<today.getFullYear()){
+        alert("Please enter a valid year.");
+        console.log("error year")
+    }
+    else if(dateIn[1]<(today.getMonth()+1)){
+      alert("Please enter a valid month.");
+        console.log("error month")
+    }
+    else if(dateIn[2]<today.getDate()){
+      alert("Please enter a valid day.");
+        console.log("error day")
+    }
+    else if (
         errorsujet === false &&
         errordate === false  &&
         errortime === false
@@ -142,6 +166,7 @@ function RendezVous() {
                   <input
                     type="date"
                     id="date"
+                    min={datetoday}
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
                     required=""

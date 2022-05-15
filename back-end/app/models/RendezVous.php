@@ -8,7 +8,7 @@ class RendezVous extends DB{
        public function all($id = -1)
        {
            
-           $query = "SELECT r.* , t.* FROM $this->table as r , times as t where id_user like '$id' and r.id_time like t.id ";
+           $query = "SELECT r.* , t.val FROM $this->table as r , times as t where id_user like '$id' and r.id_time like t.id ";
            $query = $this->connect()->prepare($query);
            if($query->execute() && $query->rowCount()>0):
               return $query->fetchALL(PDO::FETCH_ASSOC);
@@ -46,7 +46,7 @@ class RendezVous extends DB{
        }
 
 
-       public function update($data = [])
+       public function update($data)
        {
           $query = "UPDATE $this->table SET `sujet` = ? , `date` = ? , `id_time` = ? where id like ?";   
           $query = $this->connect()->prepare($query);  

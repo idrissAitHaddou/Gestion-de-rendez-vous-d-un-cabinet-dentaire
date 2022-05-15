@@ -15,29 +15,49 @@ class RendezVous extends Component {
     };
   }
 
-
    updateAppointment = async (e , id) => {
     e.preventDefault();
 
-    let formdata = new FormData();
-    formdata.append("sujet", document.getElementById('sujet').value);
-    formdata.append("date", document.getElementById('date').value);
-    formdata.append("id", id);
-    formdata.append("id_time", document.getElementById('times'+id).value);
-
-    try {
-      const response = await axios.post(
-        "http://rdv.ma/rdv/update/",
-        formdata
-      );
-      const data = await response.data;
-      if (data) {
-        window.location = "http://localhost:3000/profile"; 
-      } else {
-      }
-    } catch (error) {
-      console.log(error);
+    let today = new Date();
+    let dateIn = document.getElementById('date').value.split('-');
+    if(dateIn[0]<today.getFullYear()){
+      alert("Please enter a valid year.");
+      console.log("error year")
     }
+    else if(dateIn[1]<(today.getMonth()+1)){
+        alert("Please enter a valid month.");
+        console.log("error month")
+    }
+    else if(dateIn[2]<today.getDate()){
+        alert("Please enter a valid day.");
+        console.log("error day")
+    }else{
+
+      let formdata = new FormData();
+      formdata.append("sujet", document.getElementById('sujet').value);
+      formdata.append("date", document.getElementById('date').value);
+      formdata.append("id", id);
+      formdata.append("id_time", document.getElementById('times'+id).value);
+      console.log(document.getElementById('sujet').value)
+      console.log(document.getElementById('date').value)
+      console.log(document.getElementById('times'+id).value)
+      console.log(id)
+
+      try {
+        const response = await axios.post(
+          "http://rdv.ma/rdv/update/",
+          formdata
+        );
+        const data = await response.data;
+        if (data) {
+          window.location = "http://localhost:3000/profile"; 
+        } else {
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+  }
     
   }
 
